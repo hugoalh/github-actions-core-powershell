@@ -51,7 +51,7 @@ A secret that need to get masked from the log.
 [Void]
 #>
 Function Add-SecretMask {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssecretmask')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsecretmask')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][AllowEmptyString()][AllowNull()][Alias('Input', 'InputObject', 'Key', 'Object', 'Secret', 'Token')][String]$Value
@@ -73,7 +73,7 @@ Get the debug status of the runner.
 [Boolean] Debug status.
 #>
 Function Get-DebugStatus {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_getgithubactionsdebugstatus')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_getdebugstatus')]
 	[OutputType([Boolean])]
 	Param ()
 	Write-Output -InputObject ($Env:RUNNER_DEBUG -ieq '1')
@@ -91,7 +91,7 @@ Whether to output as hashtable instead of object.
 [PSCustomObject] Webhook event payload as object.
 #>
 Function Get-WebhookEventPayload {
-	[CmdletBinding(DefaultParameterSetName = 'PSCustomObject', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_getgithubactionswebhookeventpayload')]
+	[CmdletBinding(DefaultParameterSetName = 'PSCustomObject', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_getwebhookeventpayload')]
 	[OutputType([Hashtable], ParameterSetName = 'Hashtable')]
 	[OutputType([PSCustomObject], ParameterSetName = 'PSCustomObject')]
 	Param (
@@ -129,7 +129,7 @@ Get the URI of the workflow run.
 [String] URI of the workflow run.
 #>
 Function Get-WorkflowRunUri {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_getgithubactionsworkflowrunuri')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_getworkflowrunuri')]
 	[OutputType([String])]
 	Param ()
 	ForEach ($Item In @('GITHUB_SERVER_URL', 'GITHUB_REPOSITORY', 'GITHUB_RUN_ID')) {
@@ -164,7 +164,7 @@ Message when the requirement is mandatory but not fulfill.
 [Void] Nothing when the requirement is mandatory.
 #>
 Function Test-Environment {
-	[CmdletBinding(DefaultParameterSetName = 'Optional', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_testgithubactionsenvironment')]
+	[CmdletBinding(DefaultParameterSetName = 'Optional', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_testenvironment')]
 	[OutputType([Boolean], ParameterSetName = 'Optional')]
 	[OutputType([Void], ParameterSetName = 'Mandatory')]
 	Param (

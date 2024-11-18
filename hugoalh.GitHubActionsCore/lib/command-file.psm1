@@ -46,7 +46,7 @@ File command.
 [Void]
 #>
 Function Clear-FileCommand {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_cleargithubactionsfilecommand')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_clearfilecommand')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][Alias('Command', 'Commands', 'FileCommands')][String[]]$FileCommand
@@ -200,7 +200,7 @@ Whether to have an optimize operation by replace exist command instead of add co
 [Void]
 #>
 Function Write-FileCommand {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionsfilecommand')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writefilecommand')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][Alias('Command')][String]$FileCommand,

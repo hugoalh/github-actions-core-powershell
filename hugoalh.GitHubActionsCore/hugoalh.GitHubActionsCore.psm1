@@ -1,17 +1,12 @@
 #Requires -PSEdition Core -Version 7.2
 [String[]]$ModulesName = @(
-	'artifact',
-	'cache',
 	'command-file',
 	'command-stdout',
 	'environment-variable',
 	'log',
-	'markup',
-	'open-id-connect',
 	'parameter',
 	'problem-matcher',
 	'summary',
-	'tool-cache',
 	'utility'
 )
 Import-Module -Name (

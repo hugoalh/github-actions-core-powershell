@@ -12,7 +12,7 @@ Clear the outputs that set in the current step.
 [Void]
 #>
 Function Clear-Output {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_cleargithubactionsoutput')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_clearoutput')]
 	[OutputType([Void])]
 	Param ()
 	Clear-GitHubActionsFileCommand -FileCommand 'GITHUB_OUTPUT'
@@ -27,7 +27,7 @@ Clear the states that set in the current step.
 [Void]
 #>
 Function Clear-State {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_cleargithubactionsstate')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_clearstate')]
 	[OutputType([Void])]
 	Param ()
 	Clear-GitHubActionsFileCommand -FileCommand 'GITHUB_STATE'
@@ -57,7 +57,7 @@ Whether to trim the value of the input(s).
 [String] Value of the input.
 #>
 Function Get-Input {
-	[CmdletBinding(DefaultParameterSetName = 'One', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_getgithubactionsinput')]
+	[CmdletBinding(DefaultParameterSetName = 'One', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_getinput')]
 	[OutputType([String], ParameterSetName = 'One')]
 	[OutputType([Hashtable], ParameterSetName = ('All', 'Prefix', 'Suffix'))]
 	Param (
@@ -135,7 +135,7 @@ Whether to trim the value of the state(s).
 [String] Value of the state.
 #>
 Function Get-State {
-	[CmdletBinding(DefaultParameterSetName = 'One', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_getgithubactionsstate')]
+	[CmdletBinding(DefaultParameterSetName = 'One', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_getstate')]
 	[OutputType([String], ParameterSetName = 'One')]
 	[OutputType([Hashtable], ParameterSetName = ('All', 'Prefix', 'Suffix'))]
 	Param (
@@ -199,7 +199,7 @@ Whether to have an optimize operation by replace exist command instead of add co
 [Void]
 #>
 Function Set-Output {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_setgithubactionsoutput')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_setoutput')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $True)][ValidatePattern('^(?:[\da-z][\da-z_-]*)?[\da-z]$', ErrorMessage = '`{0}` is not a valid GitHub Actions output name!')][Alias('Key')][String]$Name,
@@ -225,7 +225,7 @@ Whether to have an optimize operation by replace exist command instead of add co
 [Void]
 #>
 Function Set-State {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_setgithubactionsstate')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_setstate')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $True)][ValidatePattern('^(?:[\da-z][\da-z_-]*)?[\da-z]$', ErrorMessage = '`{0}` is not a valid GitHub Actions state name!')][Alias('Key')][String]$Name,

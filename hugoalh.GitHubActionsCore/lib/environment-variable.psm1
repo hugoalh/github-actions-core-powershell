@@ -21,7 +21,7 @@ Whether to have an optimize operation by replace exist command instead of add co
 [Void]
 #>
 Function Add-PATH {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionspath')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addpath')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][ValidateScript({ [System.IO.Path]::IsPathFullyQualified($_) }, ErrorMessage = '`{0}` is not a valid absolute path!')][Alias('Paths')][String[]]$Path,
@@ -84,7 +84,7 @@ Clear the environment variables that set in the current step.
 [Void]
 #>
 Function Clear-EnvironmentVariable {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_cleargithubactionsenvironmentvariable')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_clearenvironmentvariable')]
 	[OutputType([Void])]
 	Param ()
 	Clear-GitHubActionsFileCommand -FileCommand 'GITHUB_ENV'
@@ -101,7 +101,7 @@ Clear the PATHs that set in the current step.
 [Void]
 #>
 Function Clear-PATH {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_cleargithubactionspath')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_clearpath')]
 	[OutputType([Void])]
 	Param ()
 	Clear-GitHubActionsFileCommand -FileCommand 'GITHUB_PATH'
@@ -126,7 +126,7 @@ Whether to have an optimize operation by replace exist command instead of add co
 [Void]
 #>
 Function Set-EnvironmentVariable {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_setgithubactionsenvironmentvariable')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_setenvironmentvariable')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $True)][ValidateScript({ Test-EnvironmentVariableName -InputObject $_ }, ErrorMessage = '`{0}` is not a valid environment variable name!')][Alias('Key')][String]$Name,

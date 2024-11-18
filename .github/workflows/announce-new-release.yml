@@ -1,40 +1,35 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-name: "Announce New Release - Discord"
+name: "Announce New Release"
 on:
   release:
     types:
       - "published"
 jobs:
-  main:
-    name: "Main"
+  discord:
+    name: "Discord"
     permissions: {}
     runs-on: "ubuntu-latest"
     steps:
       - name: "Send Discord Webhook"
-        uses: "hugoalh/send-discord-webhook-ghaction@v6.0.1"
+        uses: "hugoalh/send-discord-webhook-ghaction@v7"
         with:
-          key: "${{secrets.DISCORD_HXHS_PROJECTNEWRELEASEANNOUNCER_WEBHOOK}}"
-          embeds: |
-            - title: "GitHub Actions Toolkit (PowerShell)"
-              description: |
+          key: "${{secrets.COMMUNITY_DISCORD_PROJECTNEWRELEASEANNOUNCER_WEBHOOK}}"
+          embeds: |-
+            - title: "GitHub Actions - Core (PowerShell)"
+              description: |-
                 > ${{github.event.repository.description}}
 
-                Version ${{github.event.release.name}} (${{github.event.release.tag_name}}) just released!
+                Version ${{github.event.release.name}} (`${{github.event.release.tag_name}}`) just released!
               timestamp: "${{github.event.release.published_at}}"
               color: "#0072C6"
-              thumbnail:
-                url: "https://i.imgur.com/OhKCMwk.png"
               author:
                 name: "${{github.event.release.author.login}}"
                 url: "${{github.event.release.author.html_url}}"
                 icon_url: "${{github.event.release.author.avatar_url}}"
               fields:
-                - name: "GitHub - Release & Changelog"
+                - name: "📋 Changelog"
                   value: "${{github.event.release.html_url}}"
-                  inline: false
-                - name: "GitHub - Repository"
+                - name: "GitHub"
                   value: "${{github.event.repository.html_url}}"
-                  inline: false
                 - name: "PowerShell Gallery"
-                  value: "https://www.powershellgallery.com/packages/hugoalh.GitHubActionsToolkit"
-                  inline: false
+                  value: "https://www.powershellgallery.com/packages/hugoalh.GitHubActionsCore"

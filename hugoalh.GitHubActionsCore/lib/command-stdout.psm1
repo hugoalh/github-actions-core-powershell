@@ -1,8 +1,7 @@
 #Requires -PSEdition Core -Version 7.2
-[String[]]$StdOutCommandsType = @(
+[String[]]$CommandsStdOutCurrent = @(
 	'add-mask',
 	'add-matcher',
-	'add-path',# Legacy.
 	'debug',
 	'echo',
 	'endgroup',
@@ -10,22 +9,100 @@
 	'group',
 	'notice',
 	'remove-matcher',
-	'save-state',# Legacy.
-	'set-env',# Legacy.
-	'set-output',# Legacy.
 	'stop-commands',
 	'warning'
 )
+[String[]]$CommandsStdOutForbid = @(
+	'add-path',
+	'save-state',
+	'set-env',
+	'set-output'
+)
 <#
 .SYNOPSIS
-GitHub Actions - Disable StdOut Command Echo
+	Escape GitHub Actions runner stdout command value.
+.NOTES
+	Use internal only.
+#>
+Function Format-StdOutCommandValue {
+	[OutputType([String])]
+	Param (
+		[Parameter(Mandatory = $True, Position = 0)][AllowEmptyString()][AllowNull()][String]$InputObject
+	)
+	Return ($InputObject -ireplace '%', '%25' -ireplace '\n', '%0A' -ireplace '\r', '%0D')
+}
+<#
+.SYNOPSIS
+	Escape GitHub Actions runner stdout command property value.
+.NOTES
+	Use internal only.
+#>
+Function Format-StdOutCommandPropertyValue {
+	[OutputType([String])]
+	Param (
+		[Parameter(Mandatory = $True, Position = 0)][AllowEmptyString()][AllowNull()][String]$InputObject
+	)
+	Return ((Format-StdOutCommandValue -InputObject $InputObject) -ireplace ',', '%2C' -ireplace ':', '%3A')
+}
+<#
+.SYNOPSIS
+	Format stdout command to communicate with the GitHub Actions runner.
+.PARAMETER StdOutCommand
+	StdOut command.
+.PARAMETER Parameter
+	Parameters of the stdout command.
+.PARAMETER Value
+	Value of the stdout command.
+.NOTES
+	Advanced.
+#>
+Function Format-StdOutCommand {
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_formatstdoutcommand')]
+	[OutputType([String])]
+	Param (
+		[Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $True)][ValidatePattern('^(?:[\da-z][\da-z._-]*)?[\da-z]$', ErrorMessage = '`{0}` is not a valid GitHub Actions stdout command!')][String]$Command,
+		[Parameter(ValueFromPipelineByPropertyName = $True)][ValidateScript({ $_ -is [Hashtable] -or $_ -is [PSCustomObject] -or $_ -is [Ordered] }, ErrorMessage = 'Value is not a Hashtable, PSCustomObject, or OrderedDictionary')]$Properties = @{},
+		[Parameter(ValueFromPipelineByPropertyName = $True)][AllowEmptyString()][AllowNull()][String]$Message
+	)
+	Process {
+		[String[]]$PropertiesName = ([PSCustomObject]$Properties).PSObject.Properties.Name
+		Return "::$Command$(($PropertiesName.Count -gt 0) ? " $(
+			$PropertiesName |
+				ForEach-Object -Process { "$_=$(Format-StdOutCommandPropertyValue ($Properties.($_) ?? ''))" } |
+				Join-String -Separator ','
+		)" : '')::$(Format-StdOutCommandValue ($Message ?? ''))"
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<#
+.SYNOPSIS
+Disable StdOut Command Echo
 .DESCRIPTION
 Disable echo most of the stdout commands, the log will not show the stdout command itself unless there has any issues; Environment variable `ACTIONS_STEP_DEBUG` will ignore this setting.
 .OUTPUTS
 [Void]
 #>
 Function Disable-StdOutCommandEcho {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_disablegithubactionsstdoutcommandecho')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_disablestdoutcommandecho')]
 	[OutputType([Void])]
 	Param ()
 	Write-StdOutCommand -StdOutCommand 'echo' -Value 'off'
@@ -44,7 +121,7 @@ An end token for re-enable stdout command process.
 [String] An end token for re-enable stdout command process.
 #>
 Function Disable-StdOutCommandProcess {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_disablegithubactionsstdoutcommandprocess')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_disablestdoutcommandprocess')]
 	[OutputType([String])]
 	Param (
 		[Parameter(Position = 0)][ValidateScript({ Test-StdOutCommandEndToken -InputObject $_ }, ErrorMessage = 'Value is not a single line string, more than or equal to 4 characters, and not match any GitHub Actions commands!')][Alias('EndKey', 'EndValue', 'Key', 'Token', 'Value')][String]$EndToken
@@ -69,7 +146,7 @@ Enable echo most of the stdout commands, the log will show the stdout command it
 [Void]
 #>
 Function Enable-StdOutCommandEcho {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_enablegithubactionsstdoutcommandecho')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_enablestdoutcommandecho')]
 	[OutputType([Void])]
 	Param ()
 	Write-StdOutCommand -StdOutCommand 'echo' -Value 'on'
@@ -88,7 +165,7 @@ An end token from disable stdout command process.
 [Void]
 #>
 Function Enable-StdOutCommandProcess {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_enablegithubactionsstdoutcommandprocess')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_enablestdoutcommandprocess')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][ValidateScript({ Test-StdOutCommandEndToken -InputObject $_ }, ErrorMessage = 'Value is not a single line string, more than or equal to 4 characters, and not match any GitHub Actions commands!')][Alias('EndKey', 'EndValue', 'Key', 'Token', 'Value')][String]$EndToken
@@ -151,37 +228,7 @@ Function Test-StdOutCommandEndToken {
 	)
 	Return ($InputObject -imatch '^(?:[\da-z][\da-z_-]*)?[\da-z]$' -and $InputObject.Length -ge 4 -and $InputObject -inotin $StdOutCommandsType)
 }
-<#
-.SYNOPSIS
-GitHub Actions - Write StdOut Command
-.DESCRIPTION
-Write stdout command to communicate with the runner machine.
-.PARAMETER StdOutCommand
-StdOut command.
-.PARAMETER Parameter
-Parameters of the stdout command.
-.PARAMETER Value
-Value of the stdout command.
-.OUTPUTS
-[Void]
-#>
-Function Write-StdOutCommand {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionsstdoutcommand')]
-	[OutputType([Void])]
-	Param (
-		[Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $True)][ValidatePattern('^(?:[\da-z][\da-z_-]*)?[\da-z]$', ErrorMessage = '`{0}` is not a valid GitHub Actions stdout command!')][Alias('Command')][String]$StdOutCommand,
-		[Parameter(ValueFromPipelineByPropertyName = $True)][ValidateScript({ $_ -is [Hashtable] -or $_ -is [PSCustomObject] -or $_ -is [Ordered] }, ErrorMessage = 'Value is not a Hashtable, PSCustomObject, or OrderedDictionary')][Alias('Parameters', 'Properties', 'Property')]$Parameter = @{},
-		[Parameter(ValueFromPipelineByPropertyName = $True)][AllowEmptyString()][AllowNull()][Alias('Content', 'Message')][String]$Value
-	)
-	Process {
-		[String[]]$ParameterNames = ([PSCustomObject]$Parameter).PSObject.Properties.Name
-		Write-Host -Object "::$StdOutCommand$(($ParameterNames.Count -gt 0) ? " $(
-			$ParameterNames |
-				ForEach-Object -Process { "$_=$(Format-StdOutCommandParameterValue ($Parameter.($_) ?? ''))" } |
-				Join-String -Separator ','
-		)" : '')::$(Format-StdOutCommandValue ($Value ?? ''))"
-	}
-}
+
 Set-Alias -Name 'Write-Command' -Value 'Write-StdOutCommand' -Option 'ReadOnly' -Scope 'Local'
 Export-ModuleMember -Function @(
 	'Disable-StdOutCommandEcho',

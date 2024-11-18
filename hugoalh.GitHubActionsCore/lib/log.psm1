@@ -14,7 +14,7 @@ Title of the foldable group.
 [Void]
 #>
 Function Enter-LogGroup {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_entergithubactionsloggroup')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_enterloggroup')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Position = 0)][AllowEmptyString()][AllowNull()][ValidatePattern('^.*$', ErrorMessage = 'Value is not a single line string!')][Alias('Header', 'Label', 'Summary')][String]$Title
@@ -31,7 +31,7 @@ End an foldable group in the log.
 [Void]
 #>
 Function Exit-LogGroup {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_exitgithubactionsloggroup')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_exitloggroup')]
 	[OutputType([Void])]
 	Param ()
 	Write-GitHubActionsStdOutCommand -StdOutCommand 'endgroup'
@@ -64,7 +64,7 @@ Summary of the message when it is too large to display.
 [Void]
 #>
 Function Write-Annotation {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionsannotation')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writeannotation')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipelineByPropertyName = $True)][ValidateSet('error', 'notice', 'warning')][String]$Type,
@@ -129,7 +129,7 @@ Return the message. By default, this function does not generate any output.
 [Void] By default, this function does not generate any output.
 #>
 Function Write-Debug {
-	[CmdletBinding(DefaultParameterSetName = 'Void', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionsdebug')]
+	[CmdletBinding(DefaultParameterSetName = 'Void', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writedebug')]
 	[OutputType([String], ParameterSetName = 'PassThru')]
 	[OutputType([Void], ParameterSetName = 'Void')]
 	Param (
@@ -174,7 +174,7 @@ Summary of the message when it is too large to display.
 [Void]
 #>
 Function Write-Error {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionserror')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writeerror')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][Alias('Content', 'Message')][String]$Data,
@@ -219,7 +219,7 @@ Exit code of the process.
 [Void]
 #>
 Function Write-Fail {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionsfail')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writefail')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][Alias('Content', 'Message')][String]$Data,
@@ -263,7 +263,7 @@ Summary of the message when it is too large to display.
 [Void]
 #>
 Function Write-Notice {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionsnotice')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writenotice')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][Alias('Content', 'Message')][String]$Data,
@@ -305,7 +305,7 @@ Summary of the message when it is too large to display.
 [Void]
 #>
 Function Write-Warning {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_writegithubactionswarning')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_writewarning')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][Alias('Content', 'Message')][String]$Data,

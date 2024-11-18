@@ -1,107 +1,84 @@
-# GitHub Actions Toolkit (PowerShell)
+# GitHub Actions - Core (PowerShell)
+
+> [!IMPORTANT]
+> - This project is transferred ownership from hugoalh Studio (`hugoalh-studio`) to hugoalh (`hugoalh`) and refactoring, some of the files may not modified/updated yet.
+> - Looking the source code of the old PowerShell module `hugoalh.GitHubActionsToolkit`? Please visit the [versions list](https://github.com/hugoalh/github-actions-core-powershell/tags) and select the correct version.
 
 [**⚖️** MIT](./LICENSE.md)
 
-**🗂️**
-[![GitHub: hugoalh-studio/ghactions-toolkit-powershell](https://img.shields.io/badge/hugoalh--studio/ghactions--toolkit--powershell-181717?logo=github&logoColor=ffffff&style=flat "GitHub: hugoalh-studio/ghactions-toolkit-powershell")](https://github.com/hugoalh-studio/ghactions-toolkit-powershell)
-[![PowerShell Gallery: hugoalh.GitHubActionsToolkit](https://img.shields.io/badge/hugoalh.GitHubActionsToolkit-0072C6?logo=powershell&logoColor=ffffff&style=flat "PowerShell Gallery: hugoalh.GitHubActionsToolkit")](https://www.powershellgallery.com/packages/hugoalh.GitHubActionsToolkit)
+[![GitHub: hugoalh/github-actions-core-powershell](https://img.shields.io/github/v/release/hugoalh/github-actions-core-powershell?label=hugoalh/github-actions-core-powershell&labelColor=181717&logo=github&logoColor=ffffff&sort=semver&style=flat "GitHub: hugoalh/github-actions-core-powershell")](https://github.com/hugoalh/github-actions-core-powershell)
+[![PowerShell Gallery: hugoalh.GitHubActionsCore](https://img.shields.io/powershellgallery/v/hugoalh.GitHubActionsCore?label=hugoalh.GitHubActionsCore&labelColor=5391FE&logo=powershell&logoColor=ffffff&style=flat "PowerShell Gallery: hugoalh.GitHubActionsCore")](https://www.powershellgallery.com/packages/hugoalh.GitHubActionsCore)
 
-**🆙** ![Latest Release Version](https://img.shields.io/github/release/hugoalh-studio/ghactions-toolkit-powershell?sort=semver&color=2187C0&label=&style=flat "Latest Release Version") (![Latest Release Date](https://img.shields.io/github/release-date/hugoalh-studio/ghactions-toolkit-powershell?color=2187C0&label=&style=flat "Latest Release Date"))
+A PowerShell module to provide a better and easier way for GitHub Actions to communicate with the runner, and the toolkit for developing GitHub Actions.
 
-A PowerShell module to provide a better and easier way for GitHub Actions to communicate with the runner machine, and the toolkit for developing GitHub Actions in PowerShell.
+## ⚠️ Important
 
-## 🎯 Target
+[official-toolkit]: https://github.com/actions/toolkit
 
-- PowerShell >= v7.2.0
-  > **💽 Require Software**
-  >
-  > - GitHub Actions Runner
-  > - NodeJS >= v16.13.0 *(Optional, for NodeJS based wrapper API)*
+This is a partial refactor of [the official toolkit][official-toolkit], not all of the features in [the official toolkit][official-toolkit] are available in here, and not all of the features in here are available in [the official toolkit][official-toolkit].
 
-### 🔗 Other Edition
+## 🌟 Features
 
-- NodeJS
-  - [actions/toolkit](https://github.com/actions/toolkit)
-    - [@actions/artifact](https://www.npmjs.com/package/@actions/artifact)
-    - [@actions/cache](https://www.npmjs.com/package/@actions/cache)
-    - [@actions/core](https://www.npmjs.com/package/@actions/core)
-    - [@actions/exec](https://www.npmjs.com/package/@actions/exec)
-    - [@actions/github](https://www.npmjs.com/package/@actions/github)
-    - [@actions/glob](https://www.npmjs.com/package/@actions/glob)
-    - [@actions/http-client](https://www.npmjs.com/package/@actions/http-client)
-    - [@actions/io](https://www.npmjs.com/package/@actions/io)
-    - [@actions/tool-cache](https://www.npmjs.com/package/@actions/tool-cache)
+- Ability to use directly on GitHub Actions with PowerShell runtime without complex setup.
 
-## 🔰 Usage
+## 🔰 Begin
 
-1. Install via PowerShell:
-    ```pwsh
-    Install-Module -Name 'hugoalh.GitHubActionsToolkit' -AcceptLicense
-    ```
-2. Import at the script (`<ScriptName>.ps1`):
-    ```ps1
-    Import-Module -Name 'hugoalh.GitHubActionsToolkit' -Scope 'Local'
-    ```
+### 🎯 Targets
 
-## 🧩 API (Excerpt)
+|  | **PowerShell Gallery** |
+|:--|:--|
+| **[PowerShell](https://microsoft.com/PowerShell)** >= v7.2.0 | ✔️ |
 
-> **ℹ️ Note**
->
-> For the prettier documentation, can visit via:
->
-> - [GitHub Repository Wiki](https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki)
+> [!NOTE]
+> - It is possible to use this module in other methods/ways which not listed in here, however those methods/ways are not officially supported, and should beware maybe cause security issues.
 
-### Function
+### #️⃣ Resources Identifier
 
-- `Add-GitHubActionsPATH`
-- `Add-GitHubActionsProblemMatcher`
-- `Add-GitHubActionsSecretMask`
-- `Add-GitHubActionsSummary`
-- `Add-GitHubActionsSummaryHeader`
-- `Add-GitHubActionsSummaryImage`
-- `Add-GitHubActionsSummaryLink`
-- `Add-GitHubActionsSummarySubscriptText`
-- `Add-GitHubActionsSummarySuperscriptText`
-- `Disable-GitHubActionsStdOutCommandEcho`
-- `Disable-GitHubActionsStdOutCommandProcess`
-- `Enable-GitHubActionsStdOutCommandEcho`
-- `Enable-GitHubActionsStdOutCommandProcess`
-- `Enter-GitHubActionsLogGroup`
-- `Exit-GitHubActionsLogGroup`
-- `Expand-GitHubActionsToolCacheCompressedFile`
-- `Export-GitHubActionsArtifact`
-- `Find-GitHubActionsToolCache`
-- `Get-GitHubActionsArtifact`
-- `Get-GitHubActionsDebugStatus`
-- `Get-GitHubActionsInput`
-- `Get-GitHubActionsOpenIdConnectToken`
-- `Get-GitHubActionsState`
-- `Get-GitHubActionsSummary`
-- `Get-GitHubActionsWebhookEventPayload`
-- `Get-GitHubActionsWorkflowRunUri`
-- `Import-GitHubActionsArtifact`
-- `Invoke-GitHubActionsToolCacheToolDownloader`
-- `Register-GitHubActionsToolCacheDirectory`
-- `Register-GitHubActionsToolCacheFile`
-- `Remove-GitHubActionsProblemMatcher`
-- `Restore-GitHubActionsCache`
-- `Save-GitHubActionsCache`
-- `Set-GitHubActionsEnvironmentVariable`
-- `Set-GitHubActionsOutput`
-- `Set-GitHubActionsState`
-- `Set-GitHubActionsSummary`
-- `Test-GitHubActionsEnvironment`
-- `Write-GitHubActionsDebug`
-- `Write-GitHubActionsError`
-- `Write-GitHubActionsFail`
-- `Write-GitHubActionsNotice`
-- `Write-GitHubActionsWarning`
+- **PowerShell Gallery:**
+  ```
+  hugoalh.GitHubActionsCore
+  ```
 
-## ✍️ Example
+## 🧩 APIs
+
+**Default Prefix:** `GitHubActions`
+
+- `Add-PATH`
+- `Add-ProblemMatcher`
+- `Add-SecretMask`
+- `Add-Summary`
+- `Disable-StdOutCommandEcho`
+- `Disable-StdOutCommandProcess`
+- `Enable-StdOutCommandEcho`
+- `Enable-StdOutCommandProcess`
+- `Enter-LogGroup`
+- `Exit-LogGroup`
+- `Get-DebugStatus`
+- `Get-Input`
+- `Get-State`
+- `Get-WebhookEventPayload`
+- `Get-WorkflowRunUri`
+- `Remove-ProblemMatcher`
+- `Set-EnvironmentVariable`
+- `Set-Output`
+- `Set-State`
+- `Set-Summary`
+- `Test-Environment`
+- `Write-Debug`
+- `Write-Error`
+- `Write-Fail`
+- `Write-Notice`
+- `Write-Warning`
+
+> [!NOTE]
+> - For the full or prettier documentation, can visit via:
+>   - [GitHub Repository Wiki](https://github.com/hugoalh/github-actions-core-powershell/wiki)
+
+## ✍️ Examples
 
 - ```ps1
-  Set-GitHubActionsOutput -Name 'foo' -Value 'bar'
+  Set-Output -Name 'foo' -Value 'bar'
   ```
 - ```ps1
-  Write-GitHubActionNotice -Message 'Hello, world!'
+  Write-GitHubActionsNotice -Message 'Hello, world!'
   ```

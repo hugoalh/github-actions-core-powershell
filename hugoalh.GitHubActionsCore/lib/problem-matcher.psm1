@@ -15,7 +15,7 @@ Literal paths of the JSON problem matcher files.
 [Void]
 #>
 Function Add-ProblemMatcher {
-	[CmdletBinding(DefaultParameterSetName = 'Path', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionsproblemmatcher')]
+	[CmdletBinding(DefaultParameterSetName = 'Path', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addproblemmatcher')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, ParameterSetName = 'Path', Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][SupportsWildcards()][ValidatePattern('^.+$', ErrorMessage = 'Value is not a single line string!')][Alias('File', 'Files', 'Paths')][String[]]$Path,
@@ -40,7 +40,7 @@ Owners of the problem matchers.
 [Void]
 #>
 Function Remove-ProblemMatcher {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_removegithubactionsproblemmatcher')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_removeproblemmatcher')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][ValidatePattern('^.+$', ErrorMessage = 'Value is not a single line string!')][Alias('Identifies', 'Identify', 'Identifier', 'Identifiers', 'Key', 'Keys', 'Name', 'Names', 'Owners')][String[]]$Owner

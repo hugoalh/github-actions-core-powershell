@@ -1,27 +1,27 @@
 @{
 	# Script module or binary module file associated with this manifest.
-	RootModule = 'hugoalh.GitHubActionsToolkit.psm1'
+	RootModule = 'hugoalh.GitHubActionsCore.psm1'
 
 	# Version number of this module.
-	ModuleVersion = '2.1.3'
+	ModuleVersion = '3.0.0'
 
 	# Supported PSEditions
 	# CompatiblePSEditions = @()
 
 	# ID used to uniquely identify this module
-	GUID = 'df24369f-3475-47f7-9eb3-e024afc48440'
+	GUID = 'b059658c-7e61-4d13-8eed-7086b7f17c1f'
 
 	# Author of this module
 	Author = 'hugoalh'
 
 	# Company or vendor of this module
-	CompanyName = 'hugoalh Studio'
+	CompanyName = 'hugoalh'
 
 	# Copyright statement for this module
-	Copyright = 'MIT © 2021~2024 hugoalh Studio'
+	Copyright = 'MIT © 2021~2024 hugoalh'
 
 	# Description of the functionality provided by this module
-	Description = 'Provide a better and easier way for GitHub Actions to communicate with the runner machine, and the toolkit for developing GitHub Actions in PowerShell.'
+	Description = 'A module to provide a better and easier way for GitHub Actions to communicate with the runner, and the toolkit for developing GitHub Actions.'
 
 	# Minimum version of the PowerShell engine required by this module
 	PowerShellVersion = '7.2'
@@ -193,6 +193,7 @@
 		PSData = @{
 			# Tags applied to this module. These help with module discovery in online galleries.
 			Tags = @(
+				'core',
 				'gh-actions',
 				'ghactions',
 				'github-actions',
@@ -204,10 +205,10 @@
 			License = '.\LICENSE.md'
 
 			# A URL to the license for this module.
-			LicenseUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/blob/main/LICENSE.md'
+			LicenseUri = 'https://github.com/hugoalh/github-actions-core-powershell/blob/main/LICENSE.md'
 
 			# A URL to the main website for this project.
-			ProjectUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell'
+			ProjectUri = 'https://github.com/hugoalh/github-actions-core-powershell'
 
 			# A literal path to an icon representing this module.
 			Icon = '.\icon.png'
@@ -216,10 +217,10 @@
 			IconUri = 'https://i.imgur.com/6qM8z4w.png'
 
 			# ReleaseNotes of this module
-			ReleaseNotes = '(Please visit https://github.com/hugoalh-studio/ghactions-toolkit-powershell/releases.)'
+			ReleaseNotes = '(Please visit https://github.com/hugoalh/github-actions-core-powershell/releases.)'
 
 			# Prerelease string of this module
-			Prerelease = 'beta3'
+			Prerelease = 'beta1'
 
 			# Flag to indicate whether the module requires explicit user acceptance for install/update/save
 			RequireLicenseAcceptance = $False
@@ -230,7 +231,7 @@
 	}
 
 	# HelpInfo URI of this module
-	HelpInfoURI = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki'
+	HelpInfoURI = 'https://github.com/hugoalh/github-actions-core-powershell/wiki'
 
 	# Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 	DefaultCommandPrefix = 'GitHubActions'

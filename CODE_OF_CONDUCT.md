@@ -38,8 +38,6 @@ This Code of Conduct applies within all community spaces, and also applies when 
 
 Instances of abusive, harassing, or otherwise unacceptable behavior maybe report to the community leaders responsible for enforcement via [fill this form](https://forms.gle/AXq9hWq2DsJrDNjP7).
 
-All new requests may need `~96 hours (~4 days)` to begin the process.
-
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the reporter of any incident.

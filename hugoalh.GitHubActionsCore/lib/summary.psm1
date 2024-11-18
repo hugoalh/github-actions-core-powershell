@@ -20,7 +20,7 @@ Whether to not add a new line or carriage return to the content; The string repr
 [Void]
 #>
 Function Add-Summary {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssummary')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsummary')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][AllowEmptyCollection()][AllowEmptyString()][AllowNull()][Alias('Content')][Object[]]$Value,
@@ -59,7 +59,7 @@ Title of the header.
 [Void]
 #>
 Function Add-SummaryHeader {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssummaryheader')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsummaryheader')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][ValidateRange(1, 6)][Byte]$Level,
@@ -90,7 +90,7 @@ Whether to not add a new line or carriage return to the content; The string repr
 [Void]
 #>
 Function Add-SummaryImage {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssummaryimage')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsummaryimage')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][Alias('Url')][String]$Uri,
@@ -149,7 +149,7 @@ Whether to not add a new line or carriage return to the content; The string repr
 [Void]
 #>
 Function Add-SummaryLink {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssummarylink')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsummarylink')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][String]$Text,
@@ -178,7 +178,7 @@ Whether to not add a new line or carriage return to the content; The string repr
 [Void]
 #>
 Function Add-SummarySubscriptText {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssummarysubscripttext')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsummarysubscripttext')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][Alias('Input', 'InputObject', 'Object')][String]$Text,
@@ -200,7 +200,7 @@ Whether to not add a new line or carriage return to the content; The string repr
 [Void]
 #>
 Function Add-SummarySuperscriptText {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_addgithubactionssummarysuperscripttext')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_addsummarysuperscripttext')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0)][Alias('Input', 'InputObject', 'Object')][String]$Text,
@@ -218,7 +218,7 @@ Clear the summary that set in the current step.
 [Void]
 #>
 Function Clear-Summary {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_cleargithubactionssummary')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_clearsummary')]
 	[OutputType([Void])]
 	Param ()
 	Clear-GitHubActionsFileCommand -FileCommand 'GITHUB_STEP_SUMMARY'
@@ -239,7 +239,7 @@ Whether to get the size of the summary instead of the contents of the summary.
 [UInt32] Size of the summary.
 #>
 Function Get-Summary {
-	[CmdletBinding(DefaultParameterSetName = 'Content', HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_getgithubactionssummary')]
+	[CmdletBinding(DefaultParameterSetName = 'Content', HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_getsummary')]
 	[OutputType([String], ParameterSetName = 'ContentRaw')]
 	[OutputType([String[]], ParameterSetName = 'Content')]
 	[OutputType([UInt32], ParameterSetName = 'Size')]
@@ -309,7 +309,7 @@ Whether to not add a new line or carriage return to the content; The string repr
 [Void]
 #>
 Function Set-Summary {
-	[CmdletBinding(HelpUri = 'https://github.com/hugoalh-studio/ghactions-toolkit-powershell/wiki/api_function_setgithubactionssummary')]
+	[CmdletBinding(HelpUri = 'https://github.com/hugoalh/github-actions-core-powershell/wiki/api_function_setsummary')]
 	[OutputType([Void])]
 	Param (
 		[Parameter(Mandatory = $True, Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)][AllowEmptyCollection()][AllowEmptyString()][AllowNull()][Alias('Content')][String[]]$Value,

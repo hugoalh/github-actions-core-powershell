@@ -1,9 +1,9 @@
 #Requires -PSEdition Core -Version 7.2
 <#
-This script is help for copy members to the file `hugoalh.GitHubActionsToolkit.psd1` for best performance, and use for debug.
+This script is help for copy members to the data file for best performance, and use for debug.
 #>
 $ErrorActionPreference = 'Stop'
-[String]$PackageName = 'hugoalh.GitHubActionsToolkit'
+[String]$PackageName = 'hugoalh.GitHubActionsCore'
 Import-Module -Name @(
 	(Join-Path -Path $PSScriptRoot -ChildPath "$PackageName\$PackageName.psm1")
 ) -Scope 'Local'

@@ -6,13 +6,72 @@ on:
       - "published"
   workflow_dispatch:
 jobs:
-  main:
-    name: "Main"
+  psg:
+    name: "PowerShell Gallery"
+    permissions:
+      contents: "read"
+    runs-on: "windows-latest"
+    env:
+      CDV_BUILDER: ""
+      CDV_POWERSHELLGALLERY_TOKEN: "${{secrets.POWERSHELLGALLERY_TOKEN}}"
+      CDV_ROOT: ".\\hugoalh.GitHubActionsCore"
+    steps:
+      - name: "Checkout Repository"
+        uses: "actions/checkout@v4"
+      - name: "Setup PowerShell Environment"
+        shell: "pwsh"
+        run: |-
+          $PSRepositoryPSGalleryMeta = Get-PSRepository -Name 'PSGallery'
+          If ($PSRepositoryPSGalleryMeta.InstallationPolicy -ine 'Trusted') {
+            Write-Host -Object 'Tweak PowerShell repository configuration.'
+            Set-PSRepository -Name 'PSGallery' -InstallationPolicy 'Trusted' -Verbose
+          }
+      - name: "Resolve Metadata"
+        id: "metadata"
+        shell: "pwsh"
+        run: |-
+          $ManifestsPath = Get-ChildItem -LiteralPath $Env:CDV_ROOT -Filter '*.psd1' -File
+          If ($ManifestsPath.Count -ne 1) {
+            Write-Error -Message 'Missing PowerShell module manifest file!' -ErrorAction 'Stop'
+          }
+          [String]$ManifestPath = $ManifestsPath.FullName
+          $ManifestFromTest = Test-ModuleManifest -Path $ManifestPath -Verbose
+          $ManifestFromData = Import-PowerShellDataFile -LiteralPath $ManifestPath -SkipLimitCheck
+          [String]$Name = $ManifestFromTest.Name
+          [String]$Version = $ManifestFromData.ModuleVersion
+          If ($Null -ine $ManifestFromData.PrivateData.PSData.Prerelease) {
+            $Version += "-$($ManifestFromData.PrivateData.PSData.Prerelease)"
+          }
+          Add-Content -LiteralPath $Env:GITHUB_OUTPUT -Value "ballname=$($Name.ToLower()).$($Version).nupkg" -Confirm:$False -Encoding 'UTF8NoBOM'
+      - name: "Build Repository"
+        if: "${{env.CDV_BUILDER != ''}}"
+        shell: "pwsh"
+        run: |-
+          . ".\$($Env:CDV_BUILDER)"
+      - name: "Publish Package To PowerShell Gallery"
+        shell: "pwsh"
+        run: |-
+          Publish-Module -Path $Env:CDV_ROOT -NugetAPIKey $Env:CDV_POWERSHELLGALLERY_TOKEN -Force -Verbose
+    outputs:
+      ballname: "${{steps.metadata.outputs.ballname}}"
+  release-assets:
+    name: "Release Assets"
+    needs:
+      - "psg"
+    if: "${{needs.psg.result == 'success'}}"
     permissions:
       contents: "write"
-    uses: "hugoalh/hugoalh/.github/workflows/call-publish-powershell-module-0.yml@main"
-    with:
-      builder: "_build-package.ps1"
-      context: ".\\hugoalh.GitHubActionsToolkit\\"
-    secrets:
-      POWERSHELLGALLERY_TOKEN: "${{secrets.POWERSHELLGALLERY_TOKEN}}"
+    runs-on: "ubuntu-latest"
+    env:
+      GH_TOKEN: "${{secrets.GITHUB_TOKEN}}"
+    steps:
+      - name: "Wait For PowerShell Gallery Registry Data Update"
+        shell: "pwsh"
+        run: |-
+          Start-Sleep -Seconds 300
+      - name: "Upload Package `${{needs.psg.outputs.ballname}}` To GitHub Release Tag `${{github.event.release.tag_name}}`"
+        shell: "pwsh"
+        run: |-
+          [String]$BallName = '${{needs.psg.outputs.ballname}}'
+          Invoke-WebRequest -Uri "https://psg-prod-eastus.azureedge.net/packages/$($BallName)" -MaximumRetryCount 5 -RetryIntervalSec 5 -Method 'GET' -OutFile $BallName
+          gh release upload '${{github.event.release.tag_name}}' $BallName --clobber --repo $Env:GITHUB_REPOSITORY
