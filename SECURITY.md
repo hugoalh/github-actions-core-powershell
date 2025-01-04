@@ -4,7 +4,7 @@
 
 | **Versions** | **Release Date** | **Long Term Support Date** | **End Of Life Date** |
 |:-:|:-:|:-:|:-:|
-| v3.X.X (`hugoalh.GitHubActionsCore`) | *Unknown* | *N/A* | *Unknown* |
+| v3.X.X (`hugoalh.GitHubActionsCore`) | *Unknown* | *Unknown* | *Unknown* |
 | v2.X.X (`hugoalh.GitHubActionsToolkit`) | 2023-12-04 | 2023-12-27 | *Unknown* |
 
 > [!NOTE]

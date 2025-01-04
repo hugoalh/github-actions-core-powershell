@@ -18,7 +18,7 @@
 	CompanyName = 'hugoalh'
 
 	# Copyright statement for this module
-	Copyright = 'MIT © 2021~2024 hugoalh'
+	Copyright = 'MIT © 2021~2025 hugoalh'
 
 	# Description of the functionality provided by this module
 	Description = 'A module to provide a better and easier way for GitHub Actions to communicate with the runner, and the toolkit for developing GitHub Actions.'

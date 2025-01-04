@@ -3,7 +3,7 @@
 This script is help for copy members to the data file for best performance, and use for debug.
 #>
 $ErrorActionPreference = 'Stop'
-[String]$PackageName = 'hugoalh.GitHubActionsCore'
+[System.String]$PackageName = 'hugoalh.GitHubActionsCore'
 Import-Module -Name @(
 	(Join-Path -Path $PSScriptRoot -ChildPath "$PackageName\$PackageName.psm1")
 ) -Scope 'Local'

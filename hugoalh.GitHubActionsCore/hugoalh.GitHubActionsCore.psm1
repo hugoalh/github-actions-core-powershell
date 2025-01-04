@@ -1,5 +1,5 @@
 #Requires -PSEdition Core -Version 7.2
-[String[]]$ModulesName = @(
+[System.String[]]$ModulesName = @(
 	'command-file',
 	'command-stdout',
 	'environment-variable',
@@ -14,10 +14,10 @@ Import-Module -Name (
 		ForEach-Object -Process { Join-Path -Path $PSScriptRoot -ChildPath "lib\$_.psm1" }
 ) -Scope 'Local'
 [PSCustomObject[]]$PackageCommands = Get-Command -Module $ModulesName -ListImported
-[String[]]$PackageFunctions = $PackageCommands |
+[System.String[]]$PackageFunctions = $PackageCommands |
 	Where-Object -FilterScript { $_.CommandType -ieq 'Function' } |
 	Select-Object -ExpandProperty 'Name'
-[String[]]$PackageAliases = $PackageCommands |
+[System.String[]]$PackageAliases = $PackageCommands |
 	Where-Object -FilterScript { $_.CommandType -ieq 'Alias' } |
 	Select-Object -ExpandProperty 'Name'
 Export-ModuleMember -Function $PackageFunctions -Alias $PackageAliases

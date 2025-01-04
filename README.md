@@ -1,7 +1,7 @@
 # GitHub Actions - Core (PowerShell)
 
 > [!IMPORTANT]
-> - This project is transferred ownership from hugoalh Studio (`hugoalh-studio`) to hugoalh (`hugoalh`) and refactoring, some of the files may not modified/updated yet.
+> - This project is transferred ownership from hugoalh Studio (`hugoalh-studio`) to hugoalh (`hugoalh`).
 > - Looking the source code of the old PowerShell module `hugoalh.GitHubActionsToolkit`? Please visit the [versions list](https://github.com/hugoalh/github-actions-core-powershell/tags) and select the correct version.
 
 [**⚖️** MIT](./LICENSE.md)
@@ -80,5 +80,5 @@ This is a partial refactor of [the official toolkit][official-toolkit], not all 
   Set-Output -Name 'foo' -Value 'bar'
   ```
 - ```ps1
-  Write-GitHubActionsNotice -Message 'Hello, world!'
+  Write-Notice -Message 'Hello, world!'
   ```
