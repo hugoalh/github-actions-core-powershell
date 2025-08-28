@@ -2,13 +2,14 @@
 version: 2
 updates:
   - package-ecosystem: "github-actions"
-    directory: "/"
+    directories:
+      - "/"
     schedule:
-      interval: "daily"
-      timezone: "Etc/UTC"
+      interval: "weekly"
     labels:
-      - "Platform/GitHubActions"
-      - "Type/Dependency 📦"
-    open-pull-requests-limit: 100
+      - "dependency 📦"
+      - "github-actions"
     pull-request-branch-name:
       separator: "/"
+    cooldown:
+      default-days: 1
